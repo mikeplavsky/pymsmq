@@ -7,4 +7,6 @@ from constants import *
 queue = qi.Open(MQ_RECEIVE_ACCESS, MQ_DENY_NONE)
 
 msg = queue.Receive(ReceiveTimeout=1000)
+
 print( msg.Label )
+print( msg.Body )
