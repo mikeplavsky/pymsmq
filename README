@@ -1,4 +1,4 @@
 Some thoughts:
 
-If there are any constants or IID required, MSFT Visual Studio C++ Express can be used to get those.
-async receive works weird, from time to time just stops receiving events
+- If there are any constants or IID required, MSFT Visual Studio C++ Express can be used to get those.
+- Async receive works weird, from time to time just stops receiving events
