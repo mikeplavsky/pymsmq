@@ -7,20 +7,36 @@ from constants import *
 queue = qi.Open(MQ_RECEIVE_ACCESS, MQ_DENY_NONE)
 
 class Evs:
-	
-	def OnArrived(self,queue,cursor):
+
+	Called = False
+
+	def OnArrived(self,q,c):
 		
 		msg = queue.Receive()
-		print( msg.Label )
+		print( msg.Label )		
+		
+		print ('got message')
+		Evs.Called = True
 
-ev = win32com.client.DispatchWithEvents("MSMQ.MSMQEvent",Evs)
+ev = win32com.client.DispatchWithEvents("MSMQ.MSMQEvent",Evs)		
 queue.EnableNotification( Event = ev, ReceiveTimeout = 10000 )
 
 while True:
 
-	pythoncom.PumpWaitingMessages()
+	if Evs.Called: 
+	
+		print ('setting event')
+		
+		ev = win32com.client.DispatchWithEvents("MSMQ.MSMQEvent",Evs)		
+		queue.EnableNotification( Event = ev, ReceiveTimeout = 10000 )
+		
+		Evs.Called = False
+	
+	pythoncom.PumpWaitingMessages()	
 	
 	import time
-	time.sleep(2)
+	time.sleep(0.2)
+	
+	
 	
 	

@@ -8,7 +8,7 @@ queue = qi.Open(MQ_SEND_ACCESS, MQ_DENY_NONE)
 
 msg = win32com.client.Dispatch("MSMQ.MSMQMessage")
 
-for i in range(0,100):
+for i in range(0,10):
 
 	msg.Label = "Task " + str(i)
 	msg.Body = "{report:12}"
