@@ -6,7 +6,15 @@ qi.PathName = r".\Private$\Tasks"
 from constants import *
 queue = qi.Open(MQ_RECEIVE_ACCESS, MQ_DENY_NONE)
 
-msg = queue.Receive(ReceiveTimeout=1000)
+while True:
 
-print( msg.Label )
-print( msg.Body )
+	msg = queue.Receive(ReceiveTimeout='20000')
+
+	if msg: 
+
+		print( msg.Label )
+		print( msg.Body )
+		
+	else: 
+
+		print ( 'waiting for messages' )
